@@ -1,0 +1,351 @@
+import pandas as pf
+import numpy as np
+
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+import seaborn as sns
+
+import os
+
+
+print(os.listdir())
+
+t199=pf.read_csv("2019.csv")
+
+t199.columns
+
+t19=pf.read_csv("2019.csv")
+
+t200=pf.read_csv("2020.csv")
+
+t20=pf.read_csv("2020.csv")
+
+t2100=pf.read_csv("2021.csv")
+
+t21=pf.read_csv("2021.csv")
+
+t220=pf.read_csv("2022N.csv")
+
+t22=pf.read_csv("2022N.csv")
+
+t19=t19.head()
+
+t20=t20.head()
+
+t21=t21.head()
+
+t22=t22.head()
+
+t19
+
+t20
+
+t21
+
+t22
+
+# 2019
+
+
+
+plt.figure(figsize=(10,6))
+df_happiest = t19.sort_values(by="Score",ascending=False).iloc[0:10,:]
+sns.barplot(x="Country or region",y="Score",data=df_happiest)
+
+
+
+sns.pairplot(data=t199,y_vars="Score",x_vars=['Overall rank',   'GDP per capita',
+       'Social support', 'Healthy life expectancy',
+       'Freedom to make life choices', 'Generosity',
+       'Perceptions of corruption'])
+
+plt.figure(figsize=(10,6))
+sns.heatmap(t199.corr(),annot=True)
+
+# 2020
+
+plt.figure(figsize=(10,6))
+df_happiest = t20.sort_values(by="Ladder score",ascending=False).iloc[0:12,:]
+sns.barplot(x="Country name",y="Ladder score",data=df_happiest)
+
+# 2021
+
+plt.figure(figsize=(10,6))
+df_happiest = t21.sort_values(by="Ladder score",ascending=False).iloc[0:12,:]
+sns.barplot(x="Country name",y="Ladder score",data=df_happiest)
+
+# 2022
+
+plt.figure(figsize=(10,6))
+df_happiest = t22.sort_values(by="Happiness score",ascending=False).iloc[0:12,:]
+sns.barplot(x="Country",y="Happiness score",data=df_happiest)
+
+2.	How did country ranks or scores change between the 2019 and 2020 ,20and 2021 ,21 and 22
+
+t19
+
+t20
+
+
+# 2019
+
+plt.figure(figsize=(10,6))
+sns.heatmap(t199.corr(),annot=True)
+
+# 2000
+
+t200
+
+t2000=t200.drop(['upperwhisker','lowerwhisker',], axis=1)
+
+plt.figure(figsize=(15,9))
+sns.heatmap(t2000.corr(),annot=True)
+
+# 2021
+
+t2100
+
+t210=t2100.drop(['upperwhisker','lowerwhisker',], axis=1)
+
+t210
+
+plt.figure(figsize=(15,9))
+sns.heatmap(t210.corr(),annot=True)
+
+t220
+
+t2200=t220.drop(['Whisker-high','Whisker-low',], axis=1)
+
+t2200
+
+t20
+
+t2200['Dystopia (1.83) + residual']=t2200['Dystopia (1.83) + residual'].str.replace(',','')
+
+t2200['Dystopia (1.83) + residual']=t2200['Dystopia (1.83) + residual'].astype(int)
+
+t2200['Explained by: GDP per capita']=t2200['Explained by: GDP per capita'].str.replace(',','')
+
+t2200['Explained by: GDP per capita']=t2200['Explained by: GDP per capita'].astype(int)
+
+t2200['Explained by: Social support']=t2200['Explained by: Social support'].str.replace(',','')
+
+t2200['Explained by: Social support']=t2200['Explained by: Social support'].astype(int)
+
+t2200['Explained by: Healthy life expectancy']=t2200['Explained by: Healthy life expectancy'].str.replace(',','')
+
+t2200['Explained by: Healthy life expectancy']=t2200['Explained by: Healthy life expectancy'].astype(int)
+
+t2200['Explained by: Freedom to make life choices']=t2200['Explained by: Freedom to make life choices'].str.replace(',','')
+
+t2200['Explained by: Freedom to make life choices']=t2200['Explained by: Freedom to make life choices'].astype(int)
+
+t2200['Explained by: Generosity']=t2200['Explained by: Generosity'].str.replace(',','')
+
+t2200['Explained by: Generosity']=t2200['Explained by: Generosity'].astype(int)
+
+t2200['Explained by: Perceptions of corruption']=t2200['Explained by: Perceptions of corruption'].str.replace(',','')
+
+t2200['Explained by: Perceptions of corruption']=t2200['Explained by: Perceptions of corruption'].astype(int)
+
+t2200['Dystopia (1.83) + residual']=t2200['Dystopia (1.83) + residual']/1000
+
+t2200['Explained by: GDP per capita']=t2200['Explained by: GDP per capita']/1000
+
+t2200['Explained by: Social support']=t2200['Explained by: Social support']/1000
+
+t2200['Explained by: Healthy life expectancy']=t2200['Explained by: Healthy life expectancy']/1000
+
+t2200['Explained by: Generosity']=t2200['Explained by: Generosity']/1000
+
+t2200['Explained by: Perceptions of corruption']=t2200['Explained by: Perceptions of corruption']/1000
+
+t22000=t2200.head()
+
+t22000
+
+t2200.to_csv(r'D:\trando\Happiness Data set\2022NN.csv')
+
+plt.figure(figsize=(10,6))
+sns.heatmap(t2200.corr(),annot=True)
+
+# 3.	Did any country have a  increase or decrease in happiness?
+
+t19
+
+t20
+
+sns.pairplot(data=t19,y_vars="Country or region",x_vars=['Score'])
+sns.pairplot(data=t20,y_vars="Country name",x_vars=['Ladder score'])
+sns.pairplot(data=t21,y_vars="Country name",x_vars=['Ladder score'])
+sns.pairplot(data=t22000,y_vars="Country",x_vars=['Happiness score'])
+
+this show that "finland" and "Denmark" is stable but switzerland after  2021 have a significant decrease and ice land have a significant increase
+
+# 4.	Relation b/w happiness report and healthy life
+
+sns.pairplot(data=t19,y_vars="Country or region",x_vars=[ 'Healthy life expectancy',
+       'Score'])
+sns.pairplot(data=t20,y_vars="Country name",x_vars=[ 'Healthy life expectancy',
+       'Ladder score'])
+sns.pairplot(data=t21,y_vars="Country name",x_vars=[ 'Healthy life expectancy',
+       'Ladder score'])
+sns.pairplot(data=t22000,y_vars="Country",x_vars=[ 'Explained by: Healthy life expectancy',
+               'Happiness score'])
+
+
+
+
+
+
+
+
+
+5.	Which countries are the happiest in the world?
+
+from the above analysis of data finland is the most happiest country in this 4 yr 
+
+# top 10 happiest country
+
+t199.head(10)
+
+score_2019 = t199.drop(t199.columns[[0,3,4,5,6,7,8]], axis=1)
+score_2019.rename(columns=({'Score': '2019 score'}), inplace = True)
+score_2019.set_index('Country or region', inplace=True)
+score_2019
+
+
+
+t200.head(10)
+
+t2100.head(10)
+
+t2200.head(10)
+
+score_2020 = t200.drop(t200.columns[[1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]], axis=1)
+score_2020.rename(columns=({'Ladder score': '2020 score'}), inplace = True)
+score_2020.set_index('Country name', inplace=True)
+score_2020
+
+
+
+score_2021 = t2100.drop(t2100.columns[[1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]], axis=1)
+score_2021.rename(columns=({'Ladder score': '2021 score'}), inplace = True)
+score_2021.set_index('Country name', inplace=True)
+score_2021
+
+
+
+score_2022 = t2200.drop(t2200.columns[[0,1,  4, 5, 6, 7, 8, 9, 10]], axis=1)
+score_2022.rename(columns=({'Happiness score': '2022 Score'}), inplace = True)
+score_2022.set_index('Country', inplace=True)
+score_2022
+
+
+
+df=pf.concat([score_2019, score_2020, score_2021, score_2022], axis=1)
+df.dropna(inplace=True)
+final_diff=df['2022 Score']-df['2019 score']
+
+
+df
+
+df['change2019-22']=final_diff
+df=df.round(2).sort_values('change2019-22', ascending=False)
+
+df
+
+df.head(10)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 9.	Social support and Freedom to make life choices is active part of  happiness report?
+
+sns.pairplot(data=t19,y_vars="Country or region",x_vars=[ 'Social support',
+       'Score','Freedom to make life choices'])
+sns.pairplot(data=t20,y_vars="Country name",x_vars=[ 'Social support',
+       'Ladder score','Freedom to make life choices'])
+sns.pairplot(data=t21,y_vars="Country name",x_vars=[ 'Social support',
+       'Ladder score','Freedom to make life choices'])
+sns.pairplot(data=t22000,y_vars="Country",x_vars=[ 'Explained by: Social support',
+               'Happiness score','Explained by: Freedom to make life choices'])
+
+so "social suppurt " and " Freedom to make life choices" is not linear to happiness score 
+
+df1=pf.concat([score_2019, score_2020, score_2021, score_2022], axis=1)
+df1.dropna(inplace=True)
+final_diff=(df1['2022 Score']+df1['2019 score']+df1['2021 score']+df1['2020 score'])/4
+
+
+df1['average 4 yr ']=final_diff
+df1=df1.round(2).sort_values('average 4 yr ', ascending=False)
+
+df1
+
+
+df1.head(10)
+
+df1.index
+
+data = {'Finland':7.81, 'Denmark':7.63, 'Iceland':7.53, 'Switzerland':7.53, 'Norway':7.45, 'Netherlands':7.45,
+       'Sweden':7.36, 'New Zealand':7.27, 'Austria':7.24, 'Australia':7.20}
+country = list(data.keys())
+score = list(data.values())
+  
+fig = plt.figure(figsize = (10, 5))
+ 
+c = ['red', 'yellow', 'black', 'blue', 'orange']
+plt.bar(country, score, color =c,
+        width = 0.4)
+ 
+plt.xlabel("country name")
+plt.ylabel("overall 4yr score")
+plt.title("TOP 10 COUNTRY")
+plt.show()
+
+
+
+# overall 4yr top 10 country
+
+df1.tail(10)
+
+df1.tail(10).index
+
+data = {'Ethiopia':4.25, 'Egypt':4.22, 'Togo':4.12, 'Sierra Leone':3.93, 'Zambia':3.92, 'India':3.80,
+       'Malawi':3.57, 'Tanzania':3.51, 'Zimbabwe':3.28, 'Afghanistan':2.67}
+country = list(data.keys())
+score = list(data.values())
+  
+fig = plt.figure(figsize = (12, 6))
+ 
+c = ['red', 'yellow', 'black', 'blue', 'orange']
+plt.bar(country, score, color =c,
+        width = 0.4)
+ 
+plt.xlabel("country name")
+plt.ylabel("overall 4yr score")
+plt.title("LEAST 10 COUNTRY")
+plt.show()
+
+
+
+
